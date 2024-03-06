@@ -29,7 +29,7 @@ try:
         database="catalog"
     )
     cursor = mydb.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS user (login VARCHAR(255) PRIMARY KEY, password VARCHAR(255), discont BOOL)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS user (login VARCHAR(255) PRIMARY KEY, password VARCHAR(255))")
     cursor.execute("CREATE TABLE IF NOT EXISTS positions (name VARCHAR(255) PRIMARY KEY, description VARCHAR(255), file LONGBLOB , price DECIMAL(10,2))")
     mydb.commit()
 except Error as e:
@@ -86,7 +86,7 @@ async def registration(costumer: UserRegistration):
     else:
 
         # SQL запрос для добавления user
-        sql = f"INSERT INTO user (login, password, discont) VALUES ('{costumer.login}', '{costumer.password}', FALSE)"
+        sql = f"INSERT INTO user (login, password) VALUES ('{costumer.login}', '{costumer.password}')"
 
         # Выполнение SQL запроса
         cursor.execute(sql)
