@@ -139,11 +139,14 @@ async def getCatalog(login: Annotated[str, Header()]):
     result = cursor.fetchall()
     if f'{login}' in authorized_users:
         for item in result:
-            if isinstance(item, Decimal):
-                result[result.index(item)] = item * Decimal('0.85')
-        return {"all positions in catalog", tuple(result)}
+            result[result.index(item)] = list(item)
+        for item in result:
+            for element in list(item):
+                if isinstance(element, Decimal):
+                    result[result.index(item)][item.index(element)] = element * Decimal('0.85')
+        return {"all positions in catalog": result}
     else:
-        return {"all positions in catalog",tuple(result)}
+        return {"all positions in catalog": result}
 
 class Product(BaseModel):
     name: str
@@ -172,13 +175,16 @@ async def addToCatalog(login: Annotated[str, Header()], name: Annotated[str, Que
         result = cursor.fetchall()
 
         for item in result:
-            if isinstance(item, Decimal):
-                result[result.index(item)] = item * Decimal('0.85')
+            result[result.index(item)] = list(item)
+        for item in result:
+            for element in list(item):
+                if isinstance(element, Decimal):
+                    result[result.index(item)][item.index(element)] = element * Decimal('0.85')
 
-        return {'all positions in catalog',tuple(result)}
+        return {"all positions in catalog": result}
 
     else:
-        return {"Accsess denied","To add positions, you must be authorized"}
+        return {"Accsess denied":"To add positions, you must be authorized"}
 
 
 
