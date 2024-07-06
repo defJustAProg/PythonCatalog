@@ -190,4 +190,4 @@ async def addToCatalog(login: Annotated[str, Header()], name: Annotated[str, Que
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=1650)
