@@ -9,7 +9,7 @@ from starlette.requests import Request
 
 app = FastAPI()
 authorized_users={}
-
+# any
 try:
     mydb = mysql.connector.connect(
         host="127.0.0.1",
